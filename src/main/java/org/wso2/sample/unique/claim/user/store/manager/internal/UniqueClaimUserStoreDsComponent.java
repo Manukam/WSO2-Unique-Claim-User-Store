@@ -3,6 +3,12 @@ package org.wso2.sample.unique.claim.user.store.manager.internal;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.osgi.service.component.ComponentContext;
+import org.osgi.service.component.annotations.Activate;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Deactivate;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferenceCardinality;
+import org.osgi.service.component.annotations.ReferencePolicy;
 import org.wso2.carbon.user.api.UserStoreManager;
 import org.wso2.carbon.user.core.service.RealmService;
 import org.wso2.sample.unique.claim.user.store.manager.UniqueClaimUserStore;
@@ -29,11 +35,18 @@ public class UniqueClaimUserStoreDsComponent {
     }
 
 
-    protected void setRealmService(RealmService realmService) {
-        realmService = realmService;
+    protected void setRealmService(RealmService relmService) {
+        realmService = relmService;
     }
 
     protected void unsetRealmService(RealmService realmService) {
         realmService = null;
+    }
+
+    public static RealmService getRealmService() {
+        if (log.isDebugEnabled()) {
+            log.debug("CustomJDBCUserStore - get the Realm Service");
+        }
+        return realmService;
     }
 }
